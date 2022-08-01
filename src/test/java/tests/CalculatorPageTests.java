@@ -1,5 +1,6 @@
 package tests;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class CalculatorPageTests extends BaseTest{
@@ -10,6 +11,8 @@ public class CalculatorPageTests extends BaseTest{
                 "Google Cloud Platform Pricing Calculator");
 
         calculatorPage.sendKeyInToNumberOfInstancesField("4");
+        calculatorPage.selectOS();
+        calculatorPage.selectProvisionModel();
         calculatorPage.selectSeriesOfMachine();
         calculatorPage.selectMachineType();
         calculatorPage.clickAddGpusCheckBox();
@@ -24,6 +27,6 @@ public class CalculatorPageTests extends BaseTest{
         calculatorPage.checkRegionIsFrankfurt();
         calculatorPage.checkLocalSsdSpace2x375Gib();
         calculatorPage.checkCommitmentTermOneYear();
-
+        calculatorPage.checkMonthlyAmount();
     }
 }

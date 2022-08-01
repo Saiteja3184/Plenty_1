@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 public class CalculatorPage extends BasePage {
     public CalculatorPage(WebDriver driver) {
@@ -15,8 +16,11 @@ public class CalculatorPage extends BasePage {
     private By switchToCalculator = By.xpath("//div[@class='gs-title']//b[contains(text(),'Google Cloud Pricing Calculator')]");
     private By newFirstFrame = By.xpath("//iframe[contains(@name,'goog_')]");
     private By instancesField = By.name("quantity");
-/*    private By operatingSystem = By.id("select_99");
-    private By osModel = By.id("select_option_88");*/
+    private By operatingSystem = By.id("select_99");
+    private By osModel = By.id("select_option_88");
+
+    private By provisioning = By.id("select_103");
+    private By provisioningModel = By.id("select_option_101");
     private By seriesOfMachine = By.xpath("//md-select[@name='series']/parent::md-input-container");
     private By seriesOfMachineModel = By.xpath("//md-option[@value='n1']");
     private By machineType = By.xpath("//label[text()='Machine type']/parent::md-input-container");
@@ -33,13 +37,15 @@ public class CalculatorPage extends BasePage {
     private By committedUsage = By.xpath("//md-select[@placeholder='Committed usage']");
     private By oneYearUsage = By.cssSelector("div[class='md-select-menu-container md-active md-clickable']" + " md-option[value='1'][class='md-ink-ripple']");
     private By addToEstimateButton = By.xpath("//button[@aria-label='Add to Estimate']");
-    private By informationInVmClassIsRegular = By.xpath("//md-select[@aria-label='VM Class: Regular']");
-    private By InformationInInstanceTypeIncludeN1Standard8 = By.xpath("//div[contains (text(),'Instance type: n1-standard-8')]");
-    private By regionIsFrankfurt = By.xpath("//div[contains (text(),'Region: Frankfurt')]");
+    private By regionIsFrankfurt = By.xpath("//md-list-item[1]/div");
+    private By InformationInInstanceTypeIncludeN1Standard8 = By.xpath("//md-list-item[5]/div[@class='md-list-item-text ng-binding cpc-cart-multiline flex']");
+    private By informationInVmClassIsRegular = By.xpath("//md-list-item[4]/div");
 
-    private By localSsdSpace2x375Gib = By.xpath("//div[@class='md-text'][text()='24x375 GB']");
+    private By localSsdSpace2x375Gib = By.xpath("//md-list-item[7]/div[1]");
 
-    private By commitmentTermOneYear = By.xpath("//div[contains (text(),'Commitment term: 1 Year')]");
+    private By commitmentTermOneYear = By.xpath("//md-list-item[3]/div[1]");
+
+    private By estimatedCost = By.xpath("//md-list-item[2]/div[1]");
 
 
     public void openCloudPage() {
@@ -64,6 +70,18 @@ public class CalculatorPage extends BasePage {
         WebElement numberOfInstancesField = driver.findElement(instancesField);
         numberOfInstancesField.sendKeys(keyForNumberOfInstances);
         Thread.sleep(3000);
+    }
+
+    public void selectOS() throws InterruptedException {
+        driver.findElement(operatingSystem).click();
+        Thread.sleep(3000);
+        driver.findElement(osModel).click();
+    }
+
+    public void selectProvisionModel() throws InterruptedException {
+        driver.findElement(provisioning).click();
+        Thread.sleep(3000);
+        driver.findElement(provisioningModel).click();
     }
 
     public void selectSeriesOfMachine() throws InterruptedException {
@@ -123,22 +141,38 @@ public class CalculatorPage extends BasePage {
         Thread.sleep(5000);
     }
 
-    public void checkInformationInVmClassIsRegular() {
-        driver.findElement(informationInVmClassIsRegular);
+    public void checkRegionIsFrankfurt() {
+        String region = driver.findElement(regionIsFrankfurt).getText();
+        System.out.println(region);
+        Assert.assertEquals(region,"Region: Frankfurt");
     }
     public void checkInformationInInstanceTypeIncludeN1Standard8() {
-        driver.findElement(InformationInInstanceTypeIncludeN1Standard8);
+        String instanceType = driver.findElement(InformationInInstanceTypeIncludeN1Standard8).getText();
+        System.out.println("Instance Type"+ instanceType);
+        Assert.assertEquals(instanceType,"Instance type: n1-standard-8\nCommitted Use Discount applied");
     }
 
-    public void checkRegionIsFrankfurt() {
-        driver.findElement(regionIsFrankfurt);
+    public void checkInformationInVmClassIsRegular() {
+        String provisioningModelResult = driver.findElement(informationInVmClassIsRegular).getText();
+        System.out.println(provisioningModelResult);
+        Assert.assertEquals(provisioningModelResult,"Provisioning model: Regular");
     }
 
     public void checkLocalSsdSpace2x375Gib() {
-        driver.findElement(localSsdSpace2x375Gib);
+        String localssd11 = driver.findElement(localSsdSpace2x375Gib).getText();
+        System.out.println("Local SSD"+ localssd11);
+        Assert.assertEquals(localssd11,"Local SSD: 2x375 GiB\nCommitted Use Discount applied");
     }
 
     public void checkCommitmentTermOneYear() {
-        driver.findElement(commitmentTermOneYear);
+        String commitmentTerm = driver.findElement(commitmentTermOneYear).getText();
+        System.out.println("Commitment Term"+ commitmentTerm);
+        Assert.assertEquals(commitmentTerm,"Commitment term: 1 Year");
+    }
+
+    public void checkMonthlyAmount() {
+        String amount = driver.findElement(estimatedCost).getText();
+        System.out.println("Estimated"+ amount);
+        Assert.assertEquals(amount,"2,920 total hours per month");
     }
 }
