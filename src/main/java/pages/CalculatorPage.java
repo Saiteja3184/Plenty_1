@@ -18,7 +18,6 @@ public class CalculatorPage extends BasePage {
     private By instancesField = By.name("quantity");
     private By operatingSystem = By.id("select_99");
     private By osModel = By.id("select_option_88");
-
     private By provisioning = By.id("select_103");
     private By provisioningModel = By.id("select_option_101");
     private By seriesOfMachine = By.xpath("//md-select[@name='series']/parent::md-input-container");
@@ -143,36 +142,36 @@ public class CalculatorPage extends BasePage {
 
     public void checkRegionIsFrankfurt() {
         String region = driver.findElement(regionIsFrankfurt).getText();
-        System.out.println(region);
+        //System.out.println(region);
         Assert.assertEquals(region,"Region: Frankfurt");
     }
     public void checkInformationInInstanceTypeIncludeN1Standard8() {
         String instanceType = driver.findElement(InformationInInstanceTypeIncludeN1Standard8).getText();
-        System.out.println("Instance Type"+ instanceType);
+        //System.out.println(instanceType);
         Assert.assertEquals(instanceType,"Instance type: n1-standard-8\nCommitted Use Discount applied");
     }
 
     public void checkInformationInVmClassIsRegular() {
         String provisioningModelResult = driver.findElement(informationInVmClassIsRegular).getText();
-        System.out.println(provisioningModelResult);
+        //System.out.println(provisioningModelResult);
         Assert.assertEquals(provisioningModelResult,"Provisioning model: Regular");
     }
 
     public void checkLocalSsdSpace2x375Gib() {
         String localssd11 = driver.findElement(localSsdSpace2x375Gib).getText();
-        System.out.println("Local SSD"+ localssd11);
+        //System.out.println(localssd11);
         Assert.assertEquals(localssd11,"Local SSD: 2x375 GiB\nCommitted Use Discount applied");
     }
 
     public void checkCommitmentTermOneYear() {
         String commitmentTerm = driver.findElement(commitmentTermOneYear).getText();
-        System.out.println("Commitment Term"+ commitmentTerm);
+        //System.out.println(commitmentTerm);
         Assert.assertEquals(commitmentTerm,"Commitment term: 1 Year");
     }
 
     public void checkMonthlyAmount() {
         String amount = driver.findElement(estimatedCost).getText();
-        System.out.println("Estimated"+ amount);
+        //System.out.println(amount);
         Assert.assertEquals(amount,"2,920 total hours per month");
     }
 }
