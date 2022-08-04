@@ -44,9 +44,9 @@ public class BaseTest {
         calculatorPage.checkMonthlyAmount();
     }
 
-    /*@AfterTest
+    @AfterTest
     public void closeDriver() {
         driver.close();
-    }*/
+    }
 
 }
