@@ -16,10 +16,10 @@ public class CalculatorPage extends BasePage {
     private By switchToCalculator = By.xpath("//div[@class='gs-title']//b[contains(text(),'Google Cloud Pricing Calculator')]");
     private By newFirstFrame = By.xpath("//iframe[contains(@name,'goog_')]");
     private By instancesField = By.name("quantity");
-    private By operatingSystem = By.id("select_99");
-    private By osModel = By.id("select_option_88");
-    private By provisioning = By.id("select_103");
-    private By provisioningModel = By.id("select_option_101");
+    private By operatingSystem = By.id("select_100");
+    private By osModel = By.id("select_option_89");
+    private By provisioning = By.id("select_104");
+    private By provisioningModel = By.id("select_option_102");
     private By seriesOfMachine = By.xpath("//md-select[@name='series']/parent::md-input-container");
     private By seriesOfMachineModel = By.xpath("//md-option[@value='n1']");
     private By machineType = By.xpath("//label[text()='Machine type']/parent::md-input-container");
